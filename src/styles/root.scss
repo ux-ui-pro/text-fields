@@ -1,0 +1,31 @@
+.text-field-container {
+	// Colors
+	--c-inactive: DarkGray;
+	--c-focused: hsla(214, 94%, 43%, 1);
+	--c-activated: Gray;
+	--c-hover: DimGray;
+	--c-error: hsla(0, 100%, 40%, 1);
+	--c-disabled: Silver;
+	--c-text: SlateGrey;
+	--c-placeholder: hsla(0,0, 74%, 1);
+
+	// Fonts
+	--font-family: 'Roboto', sans-serif;
+	--font-size-field: 16px;
+	--font-size-helper: 12px;
+	--font-weight: 400;
+	--line-height: 24px;
+	--letter-spacing: .009375em;
+
+	// Border
+	--border-color: var(--c-inactive);
+	--border-size-inactive: 1px;
+	--border-size-active: 2px;
+	--border-radius: 6px;
+
+	// Margins
+
+
+	// Transition
+	--transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}

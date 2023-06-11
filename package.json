@@ -1,0 +1,48 @@
+{
+  "name": "text-fields",
+  "version": "1.0.0",
+  "description": "Input, textarea, material, vanilla",
+  "author": "ux-ui.pro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ux-ui-pro/text-fields.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ux-ui-pro/text-fields/issues"
+  },
+  "main": "dist/index.js",
+  "css": "dist/index.css",
+  "module": "dist/index.module.js",
+  "targets": {
+    "main": {
+      "source": "src/index.js"
+    },
+    "module": {
+      "source": "src/index.js"
+    },
+    "css": {
+      "source": "src/index.scss"
+    }
+  },
+  "scripts": {
+    "serve": "parcel watch",
+    "build": "parcel build",
+    "clean": "rm -rf dist .parcel-cache"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "2.9.2",
+    "parcel": "^2.9.2"
+  },
+  "keywords": [
+    "text field",
+    "input",
+    "textarea",
+    "auto resizeable",
+    "icons",
+    "required",
+    "material design",
+    "mobile",
+    "desktop"
+  ]
+}
