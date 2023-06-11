@@ -1,5 +1,4 @@
-.input,
-.textarea {
+.text-field-container {
 	& ::-webkit-input-placeholder {
 		color: var(--c-placeholder);
 		opacity: 0;
