@@ -17,6 +17,7 @@
 		border-left: var(--border-size-inactive) solid;
 		border-radius: var(--border-radius) 0 0 var(--border-radius);
 		border-color: var(--border-color);
+		box-sizing: border-box;
 	}
 
 	&__notch {
@@ -27,6 +28,7 @@
 		border-top: var(--border-size-inactive) solid;
 		border-bottom: var(--border-size-inactive) solid;
 		border-color: var(--border-color);
+		box-sizing: border-box;
 
 		.input--focused &,
 		.input--filled &,
@@ -47,6 +49,7 @@
 		border-left: none;
 		border-radius: 0 var(--border-radius) var(--border-radius) 0;
 		border-color: var(--border-color);
+		box-sizing: border-box;
 	}
 
 	.input--focused &__leading,
