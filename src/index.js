@@ -17,7 +17,7 @@ const customizeLabel = (textField) => {
 }
 
 const handleInput = (input, classList, label, style) => {
-    if (input && classList && label && style) {
+    if (input && label) {
         if (input.disabled) {
             classList.add('input--disabled')
         }
@@ -51,7 +51,7 @@ const handleInput = (input, classList, label, style) => {
 }
 
 const handleTextarea = (textarea, classList, label, style) => {
-    if (textarea && classList && label && style) {
+    if (textarea && label) {
         if (textarea.disabled) {
             classList.add('textarea--disabled')
         }

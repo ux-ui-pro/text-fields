@@ -11,7 +11,7 @@ const $cf838c15c8b009ba$var$customizeLabel = (textField)=>{
     textField.parentElement.querySelector(".notched-outline__notch").appendChild(label);
 };
 const $cf838c15c8b009ba$var$handleInput = (input, classList, label, style)=>{
-    if (input && classList && label && style) {
+    if (input && label) {
         if (input.disabled) classList.add("input--disabled");
         if (input.required) label.classList.add("floating-label--required");
         if (input.value.trim().length > 0) {
@@ -32,7 +32,7 @@ const $cf838c15c8b009ba$var$handleInput = (input, classList, label, style)=>{
     }
 };
 const $cf838c15c8b009ba$var$handleTextarea = (textarea, classList, label, style)=>{
-    if (textarea && classList && label && style) {
+    if (textarea && label) {
         if (textarea.disabled) classList.add("textarea--disabled");
         if (textarea.required) label.classList.add("floating-label--required");
         if (textarea.value.trim().length > 0) {
