@@ -91,7 +91,7 @@ const handleTextarea = (textarea, classList, label, style) => {
     }
 }
 
-const Input = () => {
+const input = () => {
     const inputs = document.querySelectorAll('.input input')
 
     for (let input of inputs) {
@@ -106,7 +106,7 @@ const Input = () => {
     }
 }
 
-const Textarea = () => {
+const textarea = () => {
     const textareas = document.querySelectorAll('.textarea textarea')
 
     for (let textarea of textareas) {
@@ -121,7 +121,7 @@ const Textarea = () => {
     }
 }
 
-export {
-    Input,
-    Textarea
+export default {
+    input,
+    textarea
 }

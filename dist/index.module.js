@@ -58,7 +58,7 @@ const $cf838c15c8b009ba$var$handleTextarea = (textarea, classList, label, style)
         });
     }
 };
-const $cf838c15c8b009ba$export$f5b8910cec6cf069 = ()=>{
+const $cf838c15c8b009ba$var$input = ()=>{
     const inputs = document.querySelectorAll(".input input");
     for (let input of inputs){
         const label = input.previousElementSibling;
@@ -69,7 +69,7 @@ const $cf838c15c8b009ba$export$f5b8910cec6cf069 = ()=>{
         $cf838c15c8b009ba$var$handleInput(input, classList, label, style);
     }
 };
-const $cf838c15c8b009ba$export$379139ebc1c2b235 = ()=>{
+const $cf838c15c8b009ba$var$textarea = ()=>{
     const textareas = document.querySelectorAll(".textarea textarea");
     for (let textarea of textareas){
         const label = textarea.previousElementSibling;
@@ -80,7 +80,11 @@ const $cf838c15c8b009ba$export$379139ebc1c2b235 = ()=>{
         $cf838c15c8b009ba$var$handleTextarea(textarea, classList, label, style);
     }
 };
+var $cf838c15c8b009ba$export$2e2bcd8739ae039 = {
+    input: $cf838c15c8b009ba$var$input,
+    textarea: $cf838c15c8b009ba$var$textarea
+};
 
 
-export {$cf838c15c8b009ba$export$f5b8910cec6cf069 as Input, $cf838c15c8b009ba$export$379139ebc1c2b235 as Textarea};
+export {$cf838c15c8b009ba$export$2e2bcd8739ae039 as default};
 //# sourceMappingURL=index.module.js.map
