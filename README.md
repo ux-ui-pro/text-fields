@@ -32,7 +32,11 @@ import { Input, Textarea } from 'text-fields'
 ### SCSS
 <sup>Import files if your bundler supports SCSS</sup>
 ```SCSS
-@import "node_modules/text-fields/src/";
+@import "node_modules/text-fields/src";
+```
+<sup>or</sup>
+```SCSS
+@import "node_modules/text-fields/dist/index.css";
 ```
 <br>
 
