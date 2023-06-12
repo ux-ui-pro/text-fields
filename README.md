@@ -36,7 +36,7 @@ import { Input, Textarea } from 'text-fields'
 ```
 <sup>or</sup>
 ```CSS
-@import "../../node_modules/text-fields/dist/index.css";
+@import "./node_modules/text-fields/dist/index.css";
 ```
 <br>
 
