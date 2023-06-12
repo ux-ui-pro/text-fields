@@ -25,7 +25,11 @@ $ npm i text-fields
 
 ### Import
 ```javascript
-import { Input, Textarea } from 'text-fields'
+import TextFields from 'text-fields'
+```
+```javascript
+TextFields.input()
+TextFields.textarea()
 ```
 <br>
 
