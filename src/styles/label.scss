@@ -3,18 +3,18 @@
 	max-width: calc(100% - 30px);
 	right: initial; left: 17px;
 	pointer-events: none;
-	font-family: var(--font-family);
-	font-size: var(--font-size-field);
-	font-weight: var(--font-weight);
-	letter-spacing: var(--letter-spacing);
+	font-family: var(--tf-font-family);
+	font-size: var(--tf-font-size-field);
+	font-weight: var(--tf-font-weight);
+	letter-spacing: var(--tf-letter-spacing);
 	line-height: 23px;
-	color: var(--c-text);
+	color: var(--tf-c-text);
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	position: absolute;
 	transform-origin: left top;
-	transition: transform var(--transition),
-				color var(--transition);
+	transition: transform var(--tf-transition),
+				color var(--tf-transition);
 	text-align: left;
 	text-overflow: ellipsis;
 	white-space: nowrap;

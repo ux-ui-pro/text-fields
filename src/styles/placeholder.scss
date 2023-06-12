@@ -1,8 +1,8 @@
 .text-field-container {
 	& ::-webkit-input-placeholder {
-		color: var(--c-placeholder);
+		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--transition);
+		transition: opacity var(--tf-transition);
 	}
 
 	& :focus::-webkit-input-placeholder {
@@ -10,9 +10,9 @@
 	}
 
 	& :-ms-input-placeholder {
-		color: var(--c-placeholder);
+		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--transition);
+		transition: opacity var(--tf-transition);
 	}
 
 	& :focus:-ms-input-placeholder {
@@ -20,9 +20,9 @@
 	}
 
 	& ::-moz-placeholder {
-		color: var(--c-placeholder);
+		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--transition);
+		transition: opacity var(--tf-transition);
 	}
 
 	& :focus::-moz-placeholder {
@@ -30,9 +30,9 @@
 	}
 
 	& :-moz-placeholder {
-		color: var(--c-placeholder);
+		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--transition);
+		transition: opacity var(--tf-transition);
 	}
 
 	& :focus:-moz-placeholder {

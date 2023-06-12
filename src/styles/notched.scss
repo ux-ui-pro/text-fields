@@ -11,12 +11,12 @@
 	&__leading {
 		width: 12px; height: 100%;
 		pointer-events: none;
-		border-top: var(--border-size-inactive) solid;
+		border-top: var(--tf-border-size-inactive) solid;
 		border-right: none;
-		border-bottom: var(--border-size-inactive) solid;
-		border-left: var(--border-size-inactive) solid;
-		border-radius: var(--border-radius) 0 0 var(--border-radius);
-		border-color: var(--border-color);
+		border-bottom: var(--tf-border-size-inactive) solid;
+		border-left: var(--tf-border-size-inactive) solid;
+		border-radius: var(--tf-border-radius) 0 0 var(--tf-border-radius);
+		border-color: var(--tf-c-border);
 		box-sizing: border-box;
 	}
 
@@ -25,9 +25,9 @@
 		width: auto; height: 100%;
 		max-width: calc(100% - 12px * 2);
 		pointer-events: none;
-		border-top: var(--border-size-inactive) solid;
-		border-bottom: var(--border-size-inactive) solid;
-		border-color: var(--border-color);
+		border-top: var(--tf-border-size-inactive) solid;
+		border-bottom: var(--tf-border-size-inactive) solid;
+		border-color: var(--tf-c-border);
 		box-sizing: border-box;
 
 		.input--focused &,
@@ -43,12 +43,12 @@
 		flex-grow: 1;
 		height: 100%;
 		pointer-events: none;
-		border-top: var(--border-size-inactive) solid;
-		border-right: var(--border-size-inactive) solid;
-		border-bottom: var(--border-size-inactive) solid;
+		border-top: var(--tf-border-size-inactive) solid;
+		border-right: var(--tf-border-size-inactive) solid;
+		border-bottom: var(--tf-border-size-inactive) solid;
 		border-left: none;
-		border-radius: 0 var(--border-radius) var(--border-radius) 0;
-		border-color: var(--border-color);
+		border-radius: 0 var(--tf-border-radius) var(--tf-border-radius) 0;
+		border-color: var(--tf-c-border);
 		box-sizing: border-box;
 	}
 
@@ -64,6 +64,6 @@
 	.textarea--filled &__leading,
 	.textarea--filled &__notch,
 	.textarea--filled &__trailing {
-		border-width: var(--border-size-active);
+		border-width: var(--tf-border-size-active);
 	}
 }

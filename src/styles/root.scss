@@ -1,31 +1,28 @@
-.text-field-container {
+:root {
 	// Colors
-	--c-inactive: DarkGray;
-	--c-focused: hsla(214, 94%, 43%, 1);
-	--c-activated: Gray;
-	--c-hover: DimGray;
-	--c-error: hsla(0, 100%, 40%, 1);
-	--c-disabled: Silver;
-	--c-text: SlateGrey;
-	--c-placeholder: hsla(0,0, 74%, 1);
+	--tf-c-text: SlateGrey;
+	--tf-c-inactive: DarkGray;
+	--tf-c-focused: DodgerBlue;
+	--tf-c-activated: Gray;
+	--tf-c-hover: DimGray;
+	--tf-c-error: Crimson;
+	--tf-c-disabled: Silver;
+	--tf-c-placeholder: Silver;
+	--tf-c-border: var(--tf-c-inactive);
 
-	// Fonts
-	--font-family: 'Roboto', sans-serif;
-	--font-size-field: 16px;
-	--font-size-helper: 12px;
-	--font-weight: 400;
-	--line-height: 24px;
-	--letter-spacing: .009375em;
+	// Font
+	--tf-font-family: 'Inter', sans-serif;
+	--tf-font-size-field: 16px;
+	--tf-font-size-helper: 12px;
+	--tf-font-weight: 400;
+	--tf-line-height: 24px;
+	--tf-letter-spacing: .009375em;
 
 	// Border
-	--border-color: var(--c-inactive);
-	--border-size-inactive: 1px;
-	--border-size-active: 2px;
-	--border-radius: 6px;
-
-	// Margins
-
+	--tf-border-size-inactive: 1px;
+	--tf-border-size-active: 2px;
+	--tf-border-radius: 6px;
 
 	// Transition
-	--transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	--tf-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }

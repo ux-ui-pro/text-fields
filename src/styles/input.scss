@@ -3,7 +3,7 @@
 	display: inline-flex;
 	position: relative;
 	will-change: transform;
-	border-radius: var(--border-radius) var(--border-radius) 0 0;
+	border-radius: var(--tf-border-radius) var(--tf-border-radius) 0 0;
 	height: 48px;
 
 	input {
@@ -18,12 +18,12 @@
 		border-radius: 0;
 		background: none;
 		appearance: none;
-		font-family: var(--font-family);
-		font-size: var(--font-size-field);
+		font-family: var(--tf-font-family);
+		font-size: var(--tf-font-size-field);
 		line-height: 23px;
-		font-weight: var(--font-weight);
-		letter-spacing: var(--letter-spacing);
-		color: var(--c-text);
+		font-weight: var(--tf-font-weight);
+		letter-spacing: var(--tf-letter-spacing);
+		color: var(--tf-c-text);
 
 		&:focus {
 			outline: none;
@@ -48,52 +48,52 @@
 
 	&:hover {
 		&:not(.input--error):not(.input--disabled):not(.input--focused) {
-			--border-color: var(--c-hover);
+			--tf-c-border: var(--tf-c-hover);
 		}
 	}
 
 	&.input--leading-icon > .input__icon,
 	&.input--trailing-icon > .input__icon {
-		fill: var(--c-text);
+		fill: var(--tf-c-text);
 	}
 
 	&--focused {
-		--border-color: var(--c-focused);
+		--tf-c-border: var(--tf-c-focused);
 
 		label {
-			color: var(--c-focused);
+			color: var(--tf-c-focused);
 		}
 
 		input {
-			caret-color: var(--c-focused);
+			caret-color: var(--tf-c-focused);
 		}
 	}
 
 	&--disabled {
-		--border-color: var(--c-disabled);
+		--tf-c-border: var(--tf-c-disabled);
 
 		label,
 		input,
 		+ .input-helper {
-			color: var(--c-disabled);
+			color: var(--tf-c-disabled);
 		}
 
 		&.input--leading-icon > .input__icon,
 		&.input--trailing-icon > .input__icon {
-			fill: var(--c-disabled);
+			fill: var(--tf-c-disabled);
 		}
 	}
 
 	&--error {
-		--border-color: var(--c-error);
+		--tf-c-border: var(--tf-c-error);
 
 		input {
-			caret-color: var(--c-error);
+			caret-color: var(--tf-c-error);
 		}
 
 		label,
 		+ .input-helper {
-			color: var(--c-error);
+			color: var(--tf-c-error);
 		}
 
 		label.floating-label--required::after {
@@ -105,7 +105,7 @@
 
 		&.input--leading-icon > .input__icon,
 		&.input--trailing-icon > .input__icon {
-			fill: var(--c-error);
+			fill: var(--tf-c-error);
 		}
 	}
 
