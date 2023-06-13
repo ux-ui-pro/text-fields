@@ -25,11 +25,11 @@ $ npm i text-fields
 
 ### Import
 ```javascript
-import TextFields from 'text-fields'
+import TextField from 'text-fields'
 ```
 ```javascript
-TextFields.input()
-TextFields.textarea()
+TextField.input()
+TextField.textarea()
 ```
 <br>
 
@@ -40,7 +40,7 @@ TextFields.textarea()
 ```
 <sup>or</sup>
 ```CSS
-@import "./node_modules/text-fields/dist/index.css";
+@import "node_modules/text-fields/dist/index.css";
 ```
 <br>
 
