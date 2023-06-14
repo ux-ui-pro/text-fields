@@ -1,131 +1,104 @@
-const notched = `
-    <div class="notched-outline">
-        <div class="notched-outline__leading"></div>
-        <div class="notched-outline__notch"></div>
-        <div class="notched-outline__trailing"></div>
-    </div>
-`
+export default class TextFields {
+    constructor() {
+        this.notches = []
+        this.labels = document.querySelectorAll('.floating-label')
+        this.wrap()
+        this.handleFields()
+    }
 
-const notch = document.querySelector('.notched-outline__notch')
+    wrap = () => {
+        this.labels.forEach(label => {
+            const notchedOutline = label.closest('.notched-outline')
 
-const customizeLabel = (textField) => {
-    const label = textField.previousElementSibling
+            if (notchedOutline) {
+                this.notches.push({
+                    container: notchedOutline.parentNode,
+                    notch: notchedOutline.querySelector('.notched-outline__notch')
+                })
+            } else {
+                const notchedOutline = document.createElement('div')
 
-    if(!notch) return
+                notchedOutline.classList.add('notched-outline')
+                notchedOutline.innerHTML = `<div class="notched-outline__leading"></div><div class="notched-outline__notch">${label.outerHTML}</div><div class="notched-outline__trailing"></div>`
+                label.replaceWith(notchedOutline)
 
-    textField.parentElement.insertAdjacentHTML('afterbegin', notched)
-
-    textField.parentElement
-        .querySelector('.notched-outline__notch')
-        .appendChild(label)
-}
-
-const handleInput = (input, classList, label, style) => {
-    if (input && label) {
-        if (input.disabled) {
-            classList.add('input--disabled')
-        }
-
-        if (input.required) {
-            label.classList.add('floating-label--required')
-        }
-
-        if (input.value.trim().length > 0) {
-            classList.add('input--filled')
-            style.width = ((label.clientWidth + 13) * .75) + 'px'
-        }
-
-        input.addEventListener('focus', () => {
-            classList.add('input--focused')
-            style.width = ((label.clientWidth + 13) * .75) + 'px'
-        })
-
-        input.addEventListener('blur', () => {
-            classList.remove('input--focused')
-
-            if (input.value.trim().length <= 0 && label) {
-                style.width = 'auto'
+                this.notches.push({
+                    container: notchedOutline.parentNode,
+                    notch: notchedOutline.querySelector('.notched-outline__notch')
+                })
             }
         })
 
-        input.addEventListener('input', () => {
-            (input.value.trim().length > 0) ? classList.add('input--filled') : classList.remove('input--filled')
-        })
+        this.update()
     }
-}
 
-const handleTextarea = (textarea, classList, label, style) => {
-    if (textarea && label) {
-        if (textarea.disabled) {
-            classList.add('textarea--disabled')
-        }
+    handleFields = () => {
+        const fields = [...document.querySelectorAll('.text-field-container input, .text-field-container textarea')]
 
-        if (textarea.required) {
-            label.classList.add('floating-label--required')
-        }
+        fields.forEach(field => {
+            const notchData = this.notches.find(notchData => notchData.container.contains(field))
 
-        if (textarea.value.trim().length > 0) {
-            classList.add('textarea--filled')
-            style.width = ((label.clientWidth + 13) * .75) + 'px'
-        }
+            if (!notchData) return
 
-        textarea.addEventListener('focus', () => {
-            classList.add('textarea--focused')
-            style.width = ((label.clientWidth + 13) * .75) + 'px'
-        })
+            const { container, notch } = notchData
+            const label = notch.querySelector('.floating-label')
+            const fieldType = field instanceof HTMLTextAreaElement
 
-        textarea.addEventListener('blur', () => {
-            classList.remove('textarea--focused')
+            if (field.disabled) {
+                container.classList.add(fieldType ? 'textarea--disabled' : 'input--disabled')
+            }
 
-            if (textarea.value.trim().length <= 0 && label) {
-                style.width = 'auto'
+            if (field.required) {
+                label.classList.add('floating-label--required')
+            }
+
+            if (field.value.trim().length > 0) {
+                container.classList.add(fieldType ? 'textarea--filled' : 'input--filled')
+                notch.style.width = this.getNotchWidth(notch)
+            }
+
+            field.addEventListener('focus', () => {
+                container.classList.add(fieldType ? 'textarea--focused' : 'input--focused')
+                notch.style.width = this.getNotchWidth(notch)
+            })
+
+            field.addEventListener('blur', () => {
+                container.classList.remove(fieldType ? 'textarea--focused' : 'input--focused')
+
+                if (field.value.trim().length <= 0) {
+                    notch.style.width = 'auto'
+                }
+            })
+
+            field.addEventListener('change', () => {
+                this.toggleFilledClass(field, container, fieldType)
+            })
+
+            if (fieldType && container.classList.contains('textarea--auto-resizeable')) {
+                field.addEventListener('input', () => {
+                    field.style.height = 'auto'
+                    field.style.height = `${field.scrollHeight}px`
+                })
+            } else {
+                field.addEventListener('input', () => {
+                    this.toggleFilledClass(field, container, fieldType)
+                })
             }
         })
-
-        textarea.addEventListener('change', () => {
-            (textarea.value.trim().length > 0) ? classList.add('textarea--filled') : classList.remove('textarea--filled')
-        })
-
-        textarea.addEventListener('input', () => {
-            if (classList.contains('textarea--auto-resizeable')) {
-                textarea.style.height = 'auto'
-                textarea.style.height = (textarea.scrollHeight) + 'px'
-            }
-        })
     }
-}
 
-const input = () => {
-    const inputs = document.querySelectorAll('.input input')
-
-    for (let input of inputs) {
-        const label = input.previousElementSibling
-
-        if (!label) return
-
-        customizeLabel(input)
-        const { classList } = input.parentNode
-        const { style } = label.parentNode
-        handleInput(input, classList, label, style)
+    update = () => {
+        this.inputs = document.querySelectorAll('.text-field-container input, .text-field-container textarea')
     }
-}
 
-const textarea = () => {
-    const textareas = document.querySelectorAll('.textarea textarea')
-
-    for (let textarea of textareas) {
-        const label = textarea.previousElementSibling
-
-        if (!label) return
-
-        customizeLabel(textarea)
-        const { classList } = textarea.parentNode
-        const { style } = label.parentNode
-        handleTextarea(textarea, classList, label, style)
+    toggleFilledClass = (field, container, fieldType) => {
+        field.value.trim().length > 0
+            ? container.classList.add(fieldType ? 'textarea--filled' : 'input--filled')
+            : container.classList.remove(fieldType ? 'textarea--filled' : 'input--filled')
     }
-}
 
-export default {
-    input,
-    textarea
+    getNotchWidth = (notch) => {
+        const label = notch.querySelector('.floating-label')
+        return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * .75}px` : 'auto'
+    }
 }
