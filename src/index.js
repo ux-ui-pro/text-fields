@@ -10,13 +10,11 @@ const customizeLabel = (textField) => {
     const label = textField.previousElementSibling
     const notchedOutline = textField.parentElement.querySelector('.notched-outline')
 
-    if (notchedOutline) return
-
-    textField.parentElement.insertAdjacentHTML('afterbegin', notched)
-
-    textField.parentElement
-        .querySelector('.notched-outline__notch')
-        .appendChild(label)
+    if (!notchedOutline) {
+        textField.parentElement.insertAdjacentHTML('afterbegin', notched)
+    } else {
+        notchedOutline.querySelector('.notched-outline__notch').appendChild(label)
+    }
 }
 
 const handleInput = (input, classList, label, style) => {

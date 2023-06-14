@@ -18,9 +18,8 @@ const $4fa36e821943b400$var$notched = `
 const $4fa36e821943b400$var$customizeLabel = (textField)=>{
     const label = textField.previousElementSibling;
     const notchedOutline = textField.parentElement.querySelector(".notched-outline");
-    if (notchedOutline) return;
-    textField.parentElement.insertAdjacentHTML("afterbegin", $4fa36e821943b400$var$notched);
-    textField.parentElement.querySelector(".notched-outline__notch").appendChild(label);
+    if (!notchedOutline) textField.parentElement.insertAdjacentHTML("afterbegin", $4fa36e821943b400$var$notched);
+    else notchedOutline.querySelector(".notched-outline__notch").appendChild(label);
 };
 const $4fa36e821943b400$var$handleInput = (input, classList, label, style)=>{
     if (input && label) {
