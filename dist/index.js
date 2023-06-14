@@ -18,6 +18,7 @@ const $4fa36e821943b400$var$notched = `
 const $4fa36e821943b400$var$notch = document.querySelector(".notched-outline__notch");
 const $4fa36e821943b400$var$customizeLabel = (textField)=>{
     const label = textField.previousElementSibling;
+    if (!$4fa36e821943b400$var$notch) return;
     textField.parentElement.insertAdjacentHTML("afterbegin", $4fa36e821943b400$var$notched);
     textField.parentElement.querySelector(".notched-outline__notch").appendChild(label);
 };
@@ -74,7 +75,7 @@ const $4fa36e821943b400$var$input = ()=>{
     for (let input of inputs){
         const label = input.previousElementSibling;
         if (!label) return;
-        if (!$4fa36e821943b400$var$notch) $4fa36e821943b400$var$customizeLabel(input);
+        $4fa36e821943b400$var$customizeLabel(input);
         const { classList: classList  } = input.parentNode;
         const { style: style  } = label.parentNode;
         $4fa36e821943b400$var$handleInput(input, classList, label, style);
@@ -85,7 +86,7 @@ const $4fa36e821943b400$var$textarea = ()=>{
     for (let textarea of textareas){
         const label = textarea.previousElementSibling;
         if (!label) return;
-        if (!$4fa36e821943b400$var$notch) $4fa36e821943b400$var$customizeLabel(textarea);
+        $4fa36e821943b400$var$customizeLabel(textarea);
         const { classList: classList  } = textarea.parentNode;
         const { style: style  } = label.parentNode;
         $4fa36e821943b400$var$handleTextarea(textarea, classList, label, style);

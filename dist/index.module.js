@@ -8,6 +8,7 @@ const $cf838c15c8b009ba$var$notched = `
 const $cf838c15c8b009ba$var$notch = document.querySelector(".notched-outline__notch");
 const $cf838c15c8b009ba$var$customizeLabel = (textField)=>{
     const label = textField.previousElementSibling;
+    if (!$cf838c15c8b009ba$var$notch) return;
     textField.parentElement.insertAdjacentHTML("afterbegin", $cf838c15c8b009ba$var$notched);
     textField.parentElement.querySelector(".notched-outline__notch").appendChild(label);
 };
@@ -64,7 +65,7 @@ const $cf838c15c8b009ba$var$input = ()=>{
     for (let input of inputs){
         const label = input.previousElementSibling;
         if (!label) return;
-        if (!$cf838c15c8b009ba$var$notch) $cf838c15c8b009ba$var$customizeLabel(input);
+        $cf838c15c8b009ba$var$customizeLabel(input);
         const { classList: classList  } = input.parentNode;
         const { style: style  } = label.parentNode;
         $cf838c15c8b009ba$var$handleInput(input, classList, label, style);
@@ -75,7 +76,7 @@ const $cf838c15c8b009ba$var$textarea = ()=>{
     for (let textarea of textareas){
         const label = textarea.previousElementSibling;
         if (!label) return;
-        if (!$cf838c15c8b009ba$var$notch) $cf838c15c8b009ba$var$customizeLabel(textarea);
+        $cf838c15c8b009ba$var$customizeLabel(textarea);
         const { classList: classList  } = textarea.parentNode;
         const { style: style  } = label.parentNode;
         $cf838c15c8b009ba$var$handleTextarea(textarea, classList, label, style);

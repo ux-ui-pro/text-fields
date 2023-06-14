@@ -11,6 +11,8 @@ const notch = document.querySelector('.notched-outline__notch')
 const customizeLabel = (textField) => {
     const label = textField.previousElementSibling
 
+    if(!notch) return
+
     textField.parentElement.insertAdjacentHTML('afterbegin', notched)
 
     textField.parentElement
@@ -101,8 +103,7 @@ const input = () => {
 
         if (!label) return
 
-        if(!notch) { customizeLabel(input) }
-
+        customizeLabel(input)
         const { classList } = input.parentNode
         const { style } = label.parentNode
         handleInput(input, classList, label, style)
@@ -117,8 +118,7 @@ const textarea = () => {
 
         if (!label) return
 
-        if(!notch) { customizeLabel(textarea) }
-
+        customizeLabel(textarea)
         const { classList } = textarea.parentNode
         const { style } = label.parentNode
         handleTextarea(textarea, classList, label, style)
