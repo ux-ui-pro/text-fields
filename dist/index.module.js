@@ -7,6 +7,8 @@ const $cf838c15c8b009ba$var$notched = `
 `;
 const $cf838c15c8b009ba$var$customizeLabel = (textField)=>{
     const label = textField.previousElementSibling;
+    const notchedOutline = textField.parentElement.querySelector(".notched-outline");
+    if (notchedOutline) return;
     textField.parentElement.insertAdjacentHTML("afterbegin", $cf838c15c8b009ba$var$notched);
     textField.parentElement.querySelector(".notched-outline__notch").appendChild(label);
 };

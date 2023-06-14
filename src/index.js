@@ -8,6 +8,9 @@ const notched = `
 
 const customizeLabel = (textField) => {
     const label = textField.previousElementSibling
+    const notchedOutline = textField.parentElement.querySelector('.notched-outline')
+
+    if (notchedOutline) return
 
     textField.parentElement.insertAdjacentHTML('afterbegin', notched)
 
