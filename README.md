@@ -25,8 +25,7 @@ $ yarn add text-fields
 import TextField from 'text-fields'
 ```
 ```javascript
-TextField.input()
-TextField.textarea()
+const textFields = new TextFields()
 ```
 <br>
 
