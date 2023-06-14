@@ -7,13 +7,16 @@ const notched = `
 `
 
 const customizeLabel = (textField) => {
-    const label = textField.previousElementSibling
     const notchedOutline = textField.parentElement.querySelector('.notched-outline')
 
-    if (!notchedOutline) {
-        textField.parentElement.insertAdjacentHTML('afterbegin', notched)
-    } else {
-        notchedOutline.querySelector('.notched-outline__notch').appendChild(label)
+    if (notchedOutline) return
+
+    textField.parentElement.insertAdjacentHTML('afterbegin', notched)
+
+    const notch = textField.parentElement.querySelector('.notched-outline__notch')
+
+    if (!notch.contains(label)) {
+        notch.appendChild(label)
     }
 }
 
