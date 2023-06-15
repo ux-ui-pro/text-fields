@@ -2,7 +2,7 @@
 	& ::-webkit-input-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--tf-transition);
+		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
 	& :focus::-webkit-input-placeholder {
@@ -12,7 +12,7 @@
 	& :-ms-input-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--tf-transition);
+		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
 	& :focus:-ms-input-placeholder {
@@ -22,7 +22,7 @@
 	& ::-moz-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--tf-transition);
+		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
 	& :focus::-moz-placeholder {
@@ -32,7 +32,7 @@
 	& :-moz-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
-		transition: opacity var(--tf-transition);
+		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
 	& :focus:-moz-placeholder {

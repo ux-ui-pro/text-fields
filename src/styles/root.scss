@@ -1,6 +1,7 @@
-:root {
+.text-field-container {
 	// Colors
-	--tf-c-text: SlateGrey;
+	--tf-c-text-field: SlateGrey;
+	--tf-c-text-helper: SlateGrey;
 	--tf-c-inactive: DarkGray;
 	--tf-c-focused: DodgerBlue;
 	--tf-c-activated: Gray;
@@ -8,21 +9,22 @@
 	--tf-c-error: Crimson;
 	--tf-c-disabled: Silver;
 	--tf-c-placeholder: Silver;
-	--tf-c-border: var(--tf-c-inactive);
+	--tf-c-border: var(--tf-c-inactive); // redefined when manipulating text fields
 
 	// Font
 	--tf-font-family: 'Inter', sans-serif;
 	--tf-font-size-field: 16px;
 	--tf-font-size-helper: 12px;
 	--tf-font-weight: 400;
-	--tf-line-height: 24px;
 	--tf-letter-spacing: .009375em;
+	--tf-input-line-height: 23px;
+	--tf-textarea-line-height: 24px;
 
 	// Border
-	--tf-border-size-inactive: 1px;
-	--tf-border-size-active: 2px;
+	--tf-border-width-inactive: 1px;
+	--tf-border-width-active: 2px;
 	--tf-border-radius: 6px;
 
 	// Transition
-	--tf-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+	--tf-transition-easing: cubic-bezier(0, 0.202, 0.204, 1);
 }

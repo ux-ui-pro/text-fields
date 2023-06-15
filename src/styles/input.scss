@@ -20,10 +20,10 @@
 		appearance: none;
 		font-family: var(--tf-font-family);
 		font-size: var(--tf-font-size-field);
-		line-height: 23px;
+		line-height: var(--tf-input-line-height);
 		font-weight: var(--tf-font-weight);
 		letter-spacing: var(--tf-letter-spacing);
-		color: var(--tf-c-text);
+		color: var(--tf-c-text-field);
 
 		&:focus {
 			outline: none;
@@ -54,7 +54,7 @@
 
 	&.input--leading-icon > .input__icon,
 	&.input--trailing-icon > .input__icon {
-		fill: var(--tf-c-text);
+		fill: var(--tf-c-text-field);
 	}
 
 	&--focused {
