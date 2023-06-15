@@ -8,7 +8,7 @@ function $parcel$export(e, n, v, s) {
 $parcel$defineInteropFlag(module.exports);
 
 $parcel$export(module.exports, "default", () => $4fa36e821943b400$export$2e2bcd8739ae039);
-class $4fa36e821943b400$export$2e2bcd8739ae039 {
+class $4fa36e821943b400$var$TextFields {
     constructor(){
         this.notches = [];
         this.labels = document.querySelectorAll(".floating-label");
@@ -82,6 +82,7 @@ class $4fa36e821943b400$export$2e2bcd8739ae039 {
         return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * .75}px` : "auto";
     };
 }
+var $4fa36e821943b400$export$2e2bcd8739ae039 = $4fa36e821943b400$var$TextFields;
 
 
 //# sourceMappingURL=index.js.map

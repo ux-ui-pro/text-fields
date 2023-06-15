@@ -1,4 +1,4 @@
-class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
+class $cf838c15c8b009ba$var$TextFields {
     constructor(){
         this.notches = [];
         this.labels = document.querySelectorAll(".floating-label");
@@ -72,6 +72,7 @@ class $cf838c15c8b009ba$export$2e2bcd8739ae039 {
         return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * .75}px` : "auto";
     };
 }
+var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$TextFields;
 
 
 export {$cf838c15c8b009ba$export$2e2bcd8739ae039 as default};

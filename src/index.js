@@ -1,4 +1,4 @@
-export default class TextFields {
+class TextFields {
     constructor() {
         this.notches = []
         this.labels = document.querySelectorAll('.floating-label')
@@ -102,3 +102,5 @@ export default class TextFields {
         return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * .75}px` : 'auto'
     }
 }
+
+export default TextFields
