@@ -1,44 +1,51 @@
-<div align="center">
 <br>
+<p align="center"><strong>text-fields</strong></p>
 
-<h1>text-fields</h1>
-
-<p><sup>Input, textarea, material, vanilla</sup></p>
+<div align="center">
 
 [![npm](https://img.shields.io/npm/v/text-fields.svg?colorB=brightgreen)](https://www.npmjs.com/package/text-fields)
 [![GitHub package version](https://img.shields.io/github/package-json/v/ux-ui-pro/text-fields.svg)](https://github.com/ux-ui-pro/text-fields)
 [![NPM Downloads](https://img.shields.io/npm/dm/text-fields.svg?style=flat)](https://www.npmjs.org/package/text-fields)
 
-<sup>700B gzipped</sup>
-<h3><a href="https://codepen.io/ux-ui/full/PoxqOvp">Demo</a></h3>
 </div>
+
+<p align="center">Input, textarea, material</p>
+<p align="center"><sup>700B gzipped</sup></p>
+<p align="center"><a href="https://codepen.io/ux-ui/full/PoxqOvp">Demo</a></p>
 <br>
 
-### Installation
-```
-$ yarn add text-fields
+&#10148; **Install**
+
+```console
+yarn add text-fields
 ```
 <br>
 
-### Import
+&#10148; **Import**
+
 ```javascript
-import TextField from 'text-fields'
+import TextFields from 'text-fields';
 ```
-```javascript
-const textFields = new TextFields()
-```
-<br>
-
-### SCSS
-<sup>Import files if your bundler supports SCSS</sup>
+<sub>Import files if your bundler supports SCSS</sub>
 ```CSS
 @import "node_modules/text-fields/src";
 ```
-<sup>or</sup>
+<sub>or compiled CSS</sub>
 ```CSS
 @import "node_modules/text-fields/dist/index.css";
 ```
 <br>
 
-### License
+&#10148; **Usage**
+
+```javascript
+TextFields.init();
+```
+```javascript
+TextFields.destroy();
+```
+<br>
+
+&#10148; **License**
+
 text-fields is released under MIT license
