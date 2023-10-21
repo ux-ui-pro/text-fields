@@ -1,106 +1,131 @@
-class TextFields {
-    constructor() {
-        this.notches = []
-        this.labels = document.querySelectorAll('.floating-label')
-        this.wrap()
-        this.handleFields()
-    }
+const TextFields = {
+    notches: [],
+    labels: null,
+    inputs: null,
 
-    wrap = () => {
-        this.labels.forEach(label => {
-            const notchedOutline = label.closest('.notched-outline')
+    wrap() {
+        this.labels = document.querySelectorAll('.floating-label');
+        this.labels.forEach((label) => {
+            const notchedOutline = label.closest('.notched-outline');
 
             if (notchedOutline) {
                 this.notches.push({
                     container: notchedOutline.parentNode,
-                    notch: notchedOutline.querySelector('.notched-outline__notch')
-                })
+                    notch: notchedOutline.querySelector('.notched-outline__notch'),
+                });
             } else {
-                const notchedOutline = document.createElement('div')
+                const outline = document.createElement('div');
 
-                notchedOutline.classList.add('notched-outline')
-                notchedOutline.innerHTML = `<div class="notched-outline__leading"></div><div class="notched-outline__notch">${label.outerHTML}</div><div class="notched-outline__trailing"></div>`
-                label.replaceWith(notchedOutline)
+                outline.classList.add('notched-outline');
+                outline.innerHTML = `<div class="notched-outline__leading"></div><div class="notched-outline__notch">${label.outerHTML}</div><div class="notched-outline__trailing"></div>`;
+                label.replaceWith(outline);
 
                 this.notches.push({
-                    container: notchedOutline.parentNode,
-                    notch: notchedOutline.querySelector('.notched-outline__notch')
-                })
+                    container: outline.parentNode,
+                    notch: outline.querySelector('.notched-outline__notch'),
+                });
             }
-        })
+        });
 
-        this.update()
-    }
+        this.update();
+    },
 
-    handleFields = () => {
-        const fields = [...document.querySelectorAll('.text-field-container input, .text-field-container textarea')]
+    handleFields() {
+        const fields = [...document.querySelectorAll('.text-field-container input, .text-field-container textarea')];
 
-        fields.forEach(field => {
-            const notchData = this.notches.find(notchData => notchData.container.contains(field))
+        fields.forEach((field) => {
+            const notchData = this.notches.find((data) => data.container.contains(field));
 
-            if (!notchData) return
+            if (!notchData) return;
 
-            const { container, notch } = notchData
-            const label = notch.querySelector('.floating-label')
-            const fieldType = field instanceof HTMLTextAreaElement
+            const { container, notch } = notchData;
+            const label = notch.querySelector('.floating-label');
+            const fieldType = field instanceof HTMLTextAreaElement;
 
             if (field.disabled) {
-                container.classList.add(fieldType ? 'textarea--disabled' : 'input--disabled')
+                container.classList.add(fieldType ? 'textarea--disabled' : 'input--disabled');
             }
 
             if (field.required) {
-                label.classList.add('floating-label--required')
+                label.classList.add('floating-label--required');
             }
 
-            if (field.value.trim().length > 0) {
-                container.classList.add(fieldType ? 'textarea--filled' : 'input--filled')
-                notch.style.width = this.getNotchWidth(notch)
+            this.toggleFilledClass(field, container, fieldType);
+            this.addEventListeners(field, container, notch, fieldType);
+        });
+
+        this.notches.forEach(({ notch }) => {
+            const notchElement = notch;
+
+            notchElement.style.width = this.getNotchWidth(notchElement);
+        });
+    },
+
+    addEventListeners(field, container, notch, fieldType) {
+        const eventType = fieldType ? 'input' : 'change';
+        const notchWidth = this.getNotchWidth(notch);
+        const notchStyle = notch.style;
+
+        field.addEventListener('focus', () => {
+            container.classList.add(fieldType ? 'textarea--focused' : 'input--focused');
+            notchStyle.width = notchWidth;
+        });
+
+        field.addEventListener('blur', () => {
+            container.classList.remove(fieldType ? 'textarea--focused' : 'input--focused');
+
+            if (field.value.trim().length <= 0) {
+                notchStyle.width = 'auto';
             }
+        });
 
-            field.addEventListener('focus', () => {
-                container.classList.add(fieldType ? 'textarea--focused' : 'input--focused')
-                notch.style.width = this.getNotchWidth(notch)
-            })
+        field.addEventListener(eventType, () => {
+            this.toggleFilledClass(field, container, fieldType);
+        });
 
-            field.addEventListener('blur', () => {
-                container.classList.remove(fieldType ? 'textarea--focused' : 'input--focused')
+        if (fieldType && container.classList.contains('textarea--auto-resizeable')) {
+            field.addEventListener(eventType, () => {
+                const currentField = field;
 
-                if (field.value.trim().length <= 0) {
-                    notch.style.width = 'auto'
-                }
-            })
+                currentField.style.height = 'auto';
+                currentField.style.height = `${currentField.scrollHeight}px`;
+            });
+        }
+    },
 
-            field.addEventListener('change', () => {
-                this.toggleFilledClass(field, container, fieldType)
-            })
+    toggleFilledClass(field, container, fieldType) {
+        if (field.value.trim().length > 0) {
+            container.classList.add(fieldType ? 'textarea--filled' : 'input--filled');
+        } else {
+            container.classList.remove(fieldType ? 'textarea--filled' : 'input--filled');
+        }
+    },
 
-            if (fieldType && container.classList.contains('textarea--auto-resizeable')) {
-                field.addEventListener('input', () => {
-                    field.style.height = 'auto'
-                    field.style.height = `${field.scrollHeight}px`
-                })
-            } else {
-                field.addEventListener('input', () => {
-                    this.toggleFilledClass(field, container, fieldType)
-                })
-            }
-        })
-    }
+    getNotchWidth(notch) {
+        const label = notch.querySelector('.floating-label');
+        return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * 0.75}px` : 'auto';
+    },
 
-    update = () => {
-        this.inputs = document.querySelectorAll('.text-field-container input, .text-field-container textarea')
-    }
+    update() {
+        this.inputs = document.querySelectorAll('.text-field-container input, .text-field-container textarea');
+    },
 
-    toggleFilledClass = (field, container, fieldType) => {
-        field.value.trim().length > 0
-            ? container.classList.add(fieldType ? 'textarea--filled' : 'input--filled')
-            : container.classList.remove(fieldType ? 'textarea--filled' : 'input--filled')
-    }
+    init() {
+        this.wrap();
+        this.handleFields();
+    },
 
-    getNotchWidth = (notch) => {
-        const label = notch.querySelector('.floating-label')
-        return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * .75}px` : 'auto'
-    }
-}
+    destroy() {
+        this.notches.forEach(({ container, notch }) => {
+            const label = notch.querySelector('.floating-label');
+            label.replaceWith(label.innerHTML);
+            container.replaceWith(notch.innerHTML);
+        });
 
-export default TextFields
+        this.notches = [];
+        this.labels = null;
+        this.inputs = null;
+    },
+};
+
+export default TextFields;
