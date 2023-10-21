@@ -10,7 +10,7 @@
 </div>
 
 <p align="center">Input, textarea, material</p>
-<p align="center"><sup>700B gzipped</sup></p>
+<p align="center"><sup>1kB gzipped</sup></p>
 <p align="center"><a href="https://codepen.io/ux-ui/full/PoxqOvp">Demo</a></p>
 <br>
 
