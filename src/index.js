@@ -116,12 +116,6 @@ const TextFields = {
     },
 
     destroy() {
-        this.notches.forEach(({ container, notch }) => {
-            const label = notch.querySelector('.floating-label');
-            label.replaceWith(label.innerHTML);
-            container.replaceWith(notch.innerHTML);
-        });
-
         this.notches = [];
         this.labels = null;
         this.inputs = null;

@@ -92,11 +92,6 @@ const $4fa36e821943b400$var$TextFields = {
         this.handleFields();
     },
     destroy () {
-        this.notches.forEach(({ container: container, notch: notch })=>{
-            const label = notch.querySelector(".floating-label");
-            label.replaceWith(label.innerHTML);
-            container.replaceWith(notch.innerHTML);
-        });
         this.notches = [];
         this.labels = null;
         this.inputs = null;
