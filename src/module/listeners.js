@@ -2,6 +2,7 @@ import getNotchWidth from '../utils/getNotchWidth';
 import textareaResizeable from '../utils/textareaResizeable';
 import filled from '../states/filled';
 import disabled from '../states/disabled';
+import required from '../states/required';
 
 function listeners(field, container, notch, fieldType) {
   const eventType = fieldType ? 'input' : 'change';
@@ -27,6 +28,7 @@ function listeners(field, container, notch, fieldType) {
 
   filled(field, container, fieldType);
   disabled(field, container, fieldType);
+  required(field, container, fieldType);
 
   notchStyle.width = getNotchWidth(notch);
 }
