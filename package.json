@@ -1,6 +1,6 @@
 {
   "name": "text-fields",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Input, textarea, material",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -11,18 +11,18 @@
   "bugs": {
     "url": "https://github.com/ux-ui-pro/text-fields/issues"
   },
-  "main": "dist/index.js",
   "css": "dist/index.css",
+  "main": "dist/index.js",
   "module": "dist/index.module.js",
   "targets": {
+    "css": {
+      "source": "src/index.scss"
+    },
     "main": {
       "source": "src/index.js"
     },
     "module": {
       "source": "src/index.js"
-    },
-    "css": {
-      "source": "src/index.scss"
     }
   },
   "scripts": {
