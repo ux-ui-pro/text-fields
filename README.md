@@ -41,9 +41,6 @@ import TextFields from 'text-fields';
 ```javascript
 TextFields.init();
 ```
-```javascript
-TextFields.destroy();
-```
 <br>
 
 &#10148; **License**
