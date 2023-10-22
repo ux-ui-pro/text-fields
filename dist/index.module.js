@@ -117,12 +117,23 @@ const $cf838c15c8b009ba$var$TextFields = {
             (0, $b60dcf6944ff4d60$export$2e2bcd8739ae039)(field, container, notch, fieldType);
         });
     },
+    reset () {
+        const fields = [
+            ...document.querySelectorAll(".text-field-container input, .text-field-container textarea")
+        ];
+        const resetFields = ()=>{
+            fields.forEach((field)=>{
+                const e = field;
+                e.parentNode.classList.remove("textarea--filled", "textarea--error");
+                e.parentNode.classList.remove("input--filled", "input--error");
+                e.value = "";
+            });
+        };
+        requestAnimationFrame(resetFields);
+    },
     init () {
         this.notched();
         this.handlers();
-    },
-    destroy () {
-        this.notches = [];
     }
 };
 var $cf838c15c8b009ba$export$2e2bcd8739ae039 = $cf838c15c8b009ba$var$TextFields;

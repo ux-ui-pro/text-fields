@@ -23,13 +23,25 @@ const TextFields = {
         });
     },
 
+    reset() {
+        const fields = [...document.querySelectorAll('.text-field-container input, .text-field-container textarea')];
+
+        const resetFields = () => {
+            fields.forEach((field) => {
+                const e = field;
+
+                e.parentNode.classList.remove('textarea--filled', 'textarea--error');
+                e.parentNode.classList.remove('input--filled', 'input--error');
+                e.value = '';
+            });
+        };
+
+        requestAnimationFrame(resetFields);
+    },
+
     init() {
         this.notched();
         this.handlers();
-    },
-
-    destroy() {
-        this.notches = [];
     },
 };
 
