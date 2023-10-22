@@ -1,6 +1,6 @@
-import notched from './utils/notched';
-import observers from './utils/observers';
-import listeners from './utils/listeners';
+import notched from './module/notched';
+import observers from './module/observers';
+import listeners from './module/listeners';
 
 const TextFields = {
     notches: [],
