@@ -127,6 +127,7 @@ const $cf838c15c8b009ba$var$TextFields = {
                 e.parentNode.classList.remove("textarea--filled", "textarea--error");
                 e.parentNode.classList.remove("input--filled", "input--error");
                 e.value = "";
+                if (e.parentNode.classList.contains("textarea--auto-resizeable")) e.style.height = "auto";
             });
         };
         requestAnimationFrame(resetFields);
