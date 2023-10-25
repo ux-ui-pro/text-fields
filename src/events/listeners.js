@@ -1,8 +1,8 @@
 import getNotchWidth from '../utils/getNotchWidth';
 import textareaResizeable from '../utils/textareaResizeable';
-import filled from '../states/filled';
-import disabled from '../states/disabled';
-import required from '../states/required';
+import filled from '../behavior/filled';
+import disabled from '../behavior/disabled';
+import required from '../behavior/required';
 
 function listeners(field, container, notch, fieldType) {
   const eventType = fieldType ? 'input' : 'change';
