@@ -11,6 +11,10 @@
   "bugs": {
     "url": "https://github.com/ux-ui-pro/text-fields/issues"
   },
+  "css": "dist/index.css",
+  "main": "dist/index.js",
+  "source": "dist/index.html",
+  "module": "dist/index.module.js",
   "targets": {
     "css": {
       "source": "src/index.scss"
