@@ -1,7 +1,7 @@
 import required from '../behavior/required';
 import disabled from '../behavior/disabled';
 
-function observer(field, container) {
+const observer = (field, container) => {
   const fieldType = field instanceof HTMLTextAreaElement;
 
   const fieldObserver = new MutationObserver(() => {
@@ -10,6 +10,6 @@ function observer(field, container) {
   });
 
   fieldObserver.observe(field, { attributes: true, attributeFilter: ['required', 'disabled'] });
-}
+};
 
 export default observer;

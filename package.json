@@ -1,6 +1,6 @@
 {
   "name": "text-fields",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Input, textarea, material",
   "author": "ux-ui.pro",
   "license": "MIT",
@@ -20,32 +20,31 @@
       "source": "src/index.scss"
     },
     "main": {
-      "source": "src/index.js"
+      "source": "src/TextFields.js"
     },
     "module": {
-      "source": "src/index.js"
+      "source": "src/TextFields.js"
     }
   },
   "scripts": {
     "serve": "parcel src/index.html --dist-dir dist --cache-dir .parcel --no-source-maps --open",
     "build": "parcel build",
     "clean": "rm -rf dist .parcel-cache",
-    "lint:js": "eslint --ext .js,.vue .",
-    "lint:scss": "stylelint **/*.{scss,vue}",
+    "lint:js": "eslint --ext .js .",
+    "lint:scss": "stylelint **/*.{scss}",
     "lintfix": "yarn lint:js --fix && yarn lint:scss --fix"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "~2.10.1",
-    "eslint": "^7.32.0 || ^8.51.0",
+    "@parcel/transformer-sass": "~2.12.0",
+    "eslint": "^7.32.0 || ^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-vue": "^9.17.0",
-    "parcel": "~2.10.1",
-    "sass": "^1.69.4",
-    "postcss-html": "^1.5.0",
-    "stylelint": "^15.11.0",
-    "stylelint-config-standard-scss": "^11.0.0",
-    "stylelint-selector-bem-pattern": "^3.0.1"
+    "eslint-plugin-import": "^2.29.1",
+    "parcel": "^2.12.0",
+    "sass": "^1.72.0",
+    "postcss-html": "^1.6.0",
+    "stylelint": "^16.2.1",
+    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint-selector-bem-pattern": "^4.0.0"
   },
   "keywords": [
     "text",

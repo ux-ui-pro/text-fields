@@ -4,13 +4,9 @@ import reset from './utils/reset';
 
 const TextFields = {
   notches: [],
-
   notched,
-
   handlers,
-
   reset,
-
   async init() {
     await this.notched();
     await this.handlers();

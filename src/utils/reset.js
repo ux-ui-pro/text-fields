@@ -1,21 +1,16 @@
-function reset() {
+const reset = () => {
   const fields = [...document.querySelectorAll('.text-field-container input, .text-field-container textarea')];
 
-  const resetFields = () => {
-    fields.forEach((field) => {
-      const e = field;
+  const resetFields = () => fields.forEach((field) => {
+    field.parentNode.classList.remove('textarea--filled', 'textarea--error', 'input--filled', 'input--error');
+    field.value = '';
 
-      e.parentNode.classList.remove('textarea--filled', 'textarea--error');
-      e.parentNode.classList.remove('input--filled', 'input--error');
-      e.value = '';
-
-      if (e.parentNode.classList.contains('textarea--auto-resizeable')) {
-        e.style.height = 'auto';
-      }
-    });
-  };
+    if (field.parentNode.classList.contains('textarea--auto-resizeable')) {
+      field.style.height = 'auto';
+    }
+  });
 
   requestAnimationFrame(resetFields);
-}
+};
 
 export default reset;

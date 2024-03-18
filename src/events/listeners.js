@@ -4,20 +4,23 @@ import filled from '../behavior/filled';
 import disabled from '../behavior/disabled';
 import required from '../behavior/required';
 
-function listeners(field, container, notch, fieldType) {
+const setNotchWidth = (notch, width) => {
+  notch.style.width = width;
+};
+
+const listeners = (field, container, notch, fieldType) => {
   const eventType = fieldType ? 'input' : 'change';
-  const notchStyle = notch.style;
 
   field.addEventListener('focus', () => {
     container.classList.add(fieldType ? 'textarea--focused' : 'input--focused');
-    notchStyle.width = getNotchWidth(notch);
+
+    setNotchWidth(notch, getNotchWidth(notch));
   });
 
   field.addEventListener('blur', () => {
     container.classList.remove(fieldType ? 'textarea--focused' : 'input--focused');
-
-    if (field.value.trim().length <= 0) {
-      notchStyle.width = 'auto';
+    if (!field.value.trim()) {
+      setNotchWidth(notch, 'auto');
     }
   });
 
@@ -30,7 +33,7 @@ function listeners(field, container, notch, fieldType) {
   disabled(field, container, fieldType);
   required(field, container, fieldType);
 
-  notchStyle.width = getNotchWidth(notch);
-}
+  setNotchWidth(notch, getNotchWidth(notch));
+};
 
 export default listeners;
