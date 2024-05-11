@@ -1,7 +1,7 @@
 {
   "name": "text-fields",
-  "version": "2.5.1",
-  "description": "Input, textarea, material",
+  "version": "3.0.0-rc.0",
+  "description": "The TextFields class is designed to manage and design text fields (input and textarea) according to Material Design principles. The main function of the class is to add visual and functional enhancements to standard HTML form elements.",
   "author": "ux-ui.pro",
   "license": "MIT",
   "repository": {
@@ -13,7 +13,6 @@
   },
   "css": "dist/index.css",
   "main": "dist/index.js",
-  "source": "dist/index.html",
   "module": "dist/index.module.js",
   "targets": {
     "css": {
@@ -27,23 +26,19 @@
     }
   },
   "scripts": {
-    "serve": "parcel src/index.html --dist-dir dist --cache-dir .parcel --no-source-maps --open",
-    "build": "parcel build",
     "clean": "rm -rf dist .parcel-cache",
-    "lint:js": "eslint --ext .js .",
-    "lint:scss": "stylelint **/*.{scss}",
+    "build": "yarn clean && parcel build",
+    "lint:js": "eslint --ext .js",
+    "lint:scss": "stylelint **/*.scss",
     "lintfix": "yarn lint:js --fix && yarn lint:scss --fix"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "~2.12.0",
+    "@parcel/transformer-sass": "2.12.0",
     "eslint": "^7.32.0 || ^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.29.1",
     "parcel": "^2.12.0",
-    "sass": "^1.72.0",
-    "postcss-html": "^1.6.0",
-    "stylelint": "^16.2.1",
-    "stylelint-config-standard-scss": "^13.0.0",
+    "stylelint": "^16.5.0",
+    "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-selector-bem-pattern": "^4.0.0"
   },
   "keywords": [

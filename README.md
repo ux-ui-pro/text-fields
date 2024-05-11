@@ -9,7 +9,7 @@
 
 </div>
 
-<p align="center">Input, textarea, material</p>
+<p align="center">The TextFields class is designed to manage and design text fields (input and textarea) according to Material Design principles. The main function of the class is to add visual and functional enhancements to standard HTML form elements.</p>
 <p align="center"><sup>1kB gzipped</sup></p>
 <p align="center"><a href="https://codepen.io/ux-ui/full/PoxqOvp">Demo</a></p>
 <br>
@@ -24,7 +24,7 @@ yarn add text-fields
 &#10148; **Import**
 
 ```javascript
-import TextFields from 'text-fields';
+import TextFields from 'TextFields';
 ```
 <sub>Import files if your bundler supports SCSS</sub>
 ```CSS
@@ -39,7 +39,15 @@ import TextFields from 'text-fields';
 &#10148; **Usage**
 
 ```javascript
-TextFields.init();
+document.addEventListener('DOMContentLoaded', () => {
+  const textFields = new TextFields();
+
+  textFields.init().then(() => {
+    console.log('Text fields are ready!');
+  }).catch(error => {
+    console.error('Initialization failed:', error);
+  });
+});
 ```
 <br>
 
