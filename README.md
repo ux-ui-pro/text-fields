@@ -24,7 +24,7 @@ yarn add text-fields
 &#10148; **Import**
 
 ```javascript
-import TextFields from 'TextFields';
+import TextFields from 'text-fields';
 ```
 ```javascript
 import 'text-fields/dist/text-fields.css';
