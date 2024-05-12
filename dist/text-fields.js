@@ -9,8 +9,8 @@ function $parcel$export(e, n, v, s) {
 
 $parcel$defineInteropFlag(module.exports);
 
-$parcel$export(module.exports, "default", () => $13e2e7bf4bba37c9$export$2e2bcd8739ae039);
-class $13e2e7bf4bba37c9$var$TextFields {
+$parcel$export(module.exports, "default", function () { return $6cc68e3d49f3444d$export$2e2bcd8739ae039; });
+class $6cc68e3d49f3444d$var$TextFields {
     #notches;
     constructor(){
         this.#notches = [];
@@ -102,7 +102,7 @@ class $13e2e7bf4bba37c9$var$TextFields {
         }
     }
 }
-var $13e2e7bf4bba37c9$export$2e2bcd8739ae039 = $13e2e7bf4bba37c9$var$TextFields;
+var $6cc68e3d49f3444d$export$2e2bcd8739ae039 = $6cc68e3d49f3444d$var$TextFields;
 
 
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=text-fields.js.map

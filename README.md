@@ -26,13 +26,18 @@ yarn add text-fields
 ```javascript
 import TextFields from 'TextFields';
 ```
-<sub>Import files if your bundler supports SCSS</sub>
+```javascript
+import 'text-fields/dist/text-fields.css';
+```
+<sub>if your bundler supports SCSS</sub>
 ```CSS
-@import "node_modules/text-fields/src";
+
+@import "node_modules/text-fields/src/styles/index.scss";
 ```
 <sub>or compiled CSS</sub>
 ```CSS
-@import "node_modules/text-fields/dist/index.css";
+
+@import "node_modules/text-fields/dist/text-fields.css";
 ```
 <br>
 
