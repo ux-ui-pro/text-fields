@@ -30,14 +30,8 @@ import TextFields from 'text-fields';
 import 'text-fields/dist/text-fields.css';
 ```
 <sub>if your bundler supports SCSS</sub>
-```CSS
-
-@import "node_modules/text-fields/src/styles/index.scss";
-```
-<sub>or compiled CSS</sub>
-```CSS
-
-@import "node_modules/text-fields/dist/text-fields.css";
+```SCSS
+@import "text-fields/src/styles/index.scss";
 ```
 <br>
 
