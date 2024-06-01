@@ -1,7 +1,7 @@
 {
   "name": "text-fields",
-  "version": "3.2.0",
-  "description": "The TextFields class is designed to manage and design text fields (input and textarea) according to Material Design principles. The main function of the class is to add visual and functional enhancements to standard HTML form elements.",
+  "version": "3.3.0",
+  "description": "TextFields is designed to create and manage text fields with advanced visuals and functionality, including dynamic notched outlines, floating labels, and adaptive text areas.",
   "author": "ux-ui.pro",
   "license": "MIT",
   "repository": {
@@ -13,21 +13,6 @@
   },
   "homepage": "https://github.com/ux-ui-pro/text-fields",
   "sideEffects": false,
-  "css": "dist/index.css",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "targets": {
-    "css": {
-      "source": "src/styles/index.scss"
-    },
-    "main": {
-      "source": "src/TextFields.js"
-    },
-    "module": {
-      "source": "src/TextFields.js"
-    }
-  },
-  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "clean": "rm -rf dist .parcel-cache",
     "build": "yarn clean && parcel build",
@@ -35,14 +20,36 @@
     "lint:scss": "stylelint **/*.scss",
     "lintfix": "yarn lint:js --fix && yarn lint:scss --fix"
   },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "css": "dist/index.css",
+  "main": "dist/index.js",
+  "module": "dist/index.module.js",
+  "types": "dist/index.d.ts",
+  "targets": {
+    "css": {
+      "source": "src/index.scss"
+    },
+    "main": {
+      "source": "src/index.ts"
+    },
+    "module": {
+      "source": "src/index.ts"
+    },
+    "types": {
+      "source": "src/index.ts"
+    }
+  },
   "devDependencies": {
+    "@parcel/packager-ts": "2.12.0",
     "@parcel/transformer-sass": "2.12.0",
+    "@parcel/transformer-typescript-types": "2.12.0",
     "eslint": "^7.32.0 || ^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "parcel": "^2.12.0",
     "stylelint": "^16.6.1",
     "stylelint-config-standard-scss": "^13.1.0",
-    "stylelint-selector-bem-pattern": "^4.0.0"
+    "stylelint-selector-bem-pattern": "^4.0.0",
+    "typescript": "^5.4.5"
   },
   "keywords": [
     "text",
@@ -56,6 +63,19 @@
     "material",
     "design",
     "mobile",
-    "desktop"
+    "desktop",
+    "floating",
+    "label",
+    "notched",
+    "outline",
+    "form",
+    "validation",
+    "responsive",
+    "ui",
+    "ux",
+    "javascript",
+    "web",
+    "development",
+    "typescript"
   ]
 }

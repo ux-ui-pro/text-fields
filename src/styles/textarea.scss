@@ -32,7 +32,7 @@
 	}
 
 	&:hover {
-		&:not(.textarea--error):not(.textarea--disabled):not(.textarea--focused) {
+		&:not(.textarea--error, .textarea--disabled, .textarea--focused) {
 			--tf-c-border: var(--tf-c-hover);
 		}
 	}

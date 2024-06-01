@@ -1,41 +1,41 @@
 .text-field-container {
-	& ::-webkit-input-placeholder {
+	& ::input-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
 		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
-	& :focus::-webkit-input-placeholder {
+	& :focus::input-placeholder {
 		opacity: .65;
 	}
 
-	& :-ms-input-placeholder {
+	& :input-placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
 		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
-	& :focus:-ms-input-placeholder {
+	& :focus:input-placeholder {
 		opacity: .65;
 	}
 
-	& ::-moz-placeholder {
+	& ::placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
 		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
-	& :focus::-moz-placeholder {
+	& :focus::placeholder {
 		opacity: .65;
 	}
 
-	& :-moz-placeholder {
+	& :placeholder {
 		color: var(--tf-c-placeholder);
 		opacity: 0;
 		transition: opacity 225ms var(--tf-transition-easing);
 	}
 
-	& :focus:-moz-placeholder {
+	& :focus:placeholder {
 		opacity: .65;
 	}
 }

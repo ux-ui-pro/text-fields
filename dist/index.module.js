@@ -1,35 +1,31 @@
-class $d2af5cf5c75766e5$var$TextFields {
-    #textFieldContainer;
-    #floatingLabel;
-    #resizeObserver;
-    #notches = [];
+class $643fcf18b2d2e76f$var$TextFields {
+    textFieldContainer;
+    floatingLabel;
+    resizeObserver;
+    notches = [];
     constructor(){
-        this.#textFieldContainer = [
-            ...document.querySelectorAll(".text-field-container input, .text-field-container textarea")
-        ];
-        this.#floatingLabel = [
-            ...document.querySelectorAll(".floating-label")
-        ];
-        this.#resizeObserver = new ResizeObserver((entries)=>{
+        this.textFieldContainer = Array.from(document.querySelectorAll(".text-field-container input, .text-field-container textarea"));
+        this.floatingLabel = Array.from(document.querySelectorAll(".floating-label"));
+        this.resizeObserver = new ResizeObserver((entries)=>{
             entries.forEach((entry)=>{
                 const notch = entry.target.closest(".notched-outline")?.querySelector(".notched-outline__notch");
-                if (notch) this.#setNotchWidth(notch, this.#getNotchWidth(notch));
+                if (notch) this.setNotchWidth(notch, this.getNotchWidth(notch));
             });
         });
     }
-    #notched() {
-        this.#floatingLabel.forEach((label)=>{
-            const notchedOutline = label.closest(".notched-outline") ?? this.#createNotchedOutline(label);
-            this.#notches.push({
+    notched() {
+        this.floatingLabel.forEach((label)=>{
+            const notchedOutline = label.closest(".notched-outline") ?? this.createNotchedOutline(label);
+            this.notches.push({
                 container: notchedOutline.parentNode,
                 notch: notchedOutline.querySelector(".notched-outline__notch")
             });
-            const lastNotch = this.#notches.at(-1).notch;
-            this.#setNotchWidth(lastNotch, this.#getNotchWidth(lastNotch));
-            this.#resizeObserver.observe(notchedOutline.querySelector(".floating-label"));
+            const lastNotch = this.notches.at(-1).notch;
+            this.setNotchWidth(lastNotch, this.getNotchWidth(lastNotch));
+            this.resizeObserver.observe(notchedOutline.querySelector(".floating-label"));
         });
     }
-    #createNotchedOutline(label) {
+    createNotchedOutline(label) {
         const notchedOutline = document.createElement("div");
         notchedOutline.classList.add("notched-outline");
         notchedOutline.innerHTML = `
@@ -40,29 +36,29 @@ class $d2af5cf5c75766e5$var$TextFields {
         label.replaceWith(notchedOutline);
         return notchedOutline;
     }
-    #setNotchWidth = (notch, width)=>{
+    setNotchWidth = (notch, width)=>{
         notch.style.width = width;
     };
-    #getNotchWidth = (notch)=>{
+    getNotchWidth = (notch)=>{
         const label = notch.querySelector(".floating-label");
         return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * 0.75}px` : "auto";
     };
-    #handleEvents() {
-        this.#textFieldContainer.forEach((field)=>{
-            const notchData = this.#notches.find((data)=>data.container.contains(field));
+    handleEvents() {
+        this.textFieldContainer.forEach((field)=>{
+            const notchData = this.notches.find((data)=>data.container.contains(field));
             if (!notchData) return;
-            this.#setupObserver(field, notchData.container);
-            this.#addListeners(field, notchData.container, notchData.notch, field instanceof HTMLTextAreaElement);
+            this.setupObserver(field, notchData.container);
+            this.addListeners(field, notchData.container, notchData.notch, field instanceof HTMLTextAreaElement);
         });
     }
-    #initialNotchWidths() {
-        this.#notches.forEach(({ notch: notch })=>{
-            this.#setNotchWidth(notch, this.#getNotchWidth(notch));
+    initialNotchWidths() {
+        this.notches.forEach(({ notch: notch })=>{
+            this.setNotchWidth(notch, this.getNotchWidth(notch));
         });
     }
-    #setupObserver(field, container) {
+    setupObserver(field, container) {
         const fieldObserver = new MutationObserver(()=>{
-            this.#updateStyles(field, container, field instanceof HTMLTextAreaElement);
+            this.updateStyles(field, container, field instanceof HTMLTextAreaElement);
         });
         fieldObserver.observe(field, {
             attributes: true,
@@ -72,41 +68,41 @@ class $d2af5cf5c75766e5$var$TextFields {
             ]
         });
     }
-    #addListeners(field, container, notch, fieldType) {
+    addListeners(field, container, notch, fieldType) {
         const eventType = fieldType ? "input" : "change";
         field.addEventListener("focus", ()=>{
             container.classList.add(fieldType ? "textarea--focused" : "input--focused");
-            this.#setNotchWidth(notch, this.#getNotchWidth(notch));
+            this.setNotchWidth(notch, this.getNotchWidth(notch));
         });
         field.addEventListener("blur", ()=>{
             container.classList.remove(fieldType ? "textarea--focused" : "input--focused");
-            this.#setNotchWidth(notch, field.value.trim() ? this.#getNotchWidth(notch) : "auto");
+            this.setNotchWidth(notch, field.value.trim() ? this.getNotchWidth(notch) : "auto");
         });
         field.addEventListener(eventType, ()=>{
-            this.#updateStyles(field, container, fieldType);
-            if (fieldType) this.#resizeTextarea(field, container);
+            this.updateStyles(field, container, fieldType);
+            if (fieldType) this.resizeTextarea(field, container);
         });
-        this.#updateStyles(field, container, fieldType);
+        this.updateStyles(field, container, fieldType);
     }
-    #updateStyles(field, container, fieldType) {
+    updateStyles(field, container, fieldType) {
         container.classList.toggle(fieldType ? "textarea--filled" : "input--filled", field.value.trim().length > 0);
         container.classList.toggle(fieldType ? "textarea--disabled" : "input--disabled", field.disabled);
         container.classList.toggle(fieldType ? "textarea--error" : "input--error", field.required);
     }
-    #resizeTextarea(field, container) {
+    resizeTextarea(field, container) {
         if (container.classList.contains("textarea--auto-resizeable")) {
             field.style.height = "auto";
             field.style.height = `${field.scrollHeight}px`;
         }
     }
     async init() {
-        this.#notched();
-        this.#handleEvents();
-        this.#initialNotchWidths();
+        this.notched();
+        this.handleEvents();
+        this.initialNotchWidths();
     }
 }
-var $d2af5cf5c75766e5$export$2e2bcd8739ae039 = $d2af5cf5c75766e5$var$TextFields;
+var $643fcf18b2d2e76f$export$2e2bcd8739ae039 = $643fcf18b2d2e76f$var$TextFields;
 
 
-export {$d2af5cf5c75766e5$export$2e2bcd8739ae039 as default};
+export {$643fcf18b2d2e76f$export$2e2bcd8739ae039 as default};
 //# sourceMappingURL=index.module.js.map

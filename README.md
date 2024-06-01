@@ -9,7 +9,7 @@
 
 </div>
 
-<p align="center">The TextFields class is designed to manage and design text fields (input and textarea) according to Material Design principles. The main function of the class is to add visual and functional enhancements to standard HTML form elements.</p>
+<p align="center">TextFields is designed to create and manage text fields with advanced visuals and functionality, including dynamic notched outlines, floating labels, and adaptive text areas.</p>
 <p align="center"><sup>1kB gzipped</sup></p>
 <p align="center"><a href="https://codepen.io/ux-ui/full/PoxqOvp">Demo</a></p>
 <br>
@@ -26,12 +26,13 @@ yarn add text-fields
 ```javascript
 import TextFields from 'text-fields';
 ```
-```javascript
-import 'text-fields/dist/index.css';
+<sub>CSS</sub>
+```SCSS
+@import "text-fields/dist/";
 ```
 <sub>if your bundler supports SCSS</sub>
 ```SCSS
-@import "text-fields/src/styles/index.scss";
+@import "text-fields/src/";
 ```
 <br>
 

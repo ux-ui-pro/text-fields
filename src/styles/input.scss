@@ -47,7 +47,7 @@
 	}
 
 	&:hover {
-		&:not(.input--error):not(.input--disabled):not(.input--focused) {
+		&:not(.input--error, .input--disabled, .input--focused) {
 			--tf-c-border: var(--tf-c-hover);
 		}
 	}
