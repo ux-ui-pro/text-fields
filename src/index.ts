@@ -48,7 +48,7 @@ class TextFields {
   }
 
   private static setNotchWidth(notch: HTMLElement, width: string) {
-    const notchElement = notch; // Используем временную переменную
+    const notchElement = notch;
     notchElement.style.width = width;
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "text-fields",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "TextFields is designed to create and manage text fields with advanced visuals and functionality, including dynamic notched outlines, floating labels, and adaptive text areas.",
   "author": "ux-ui.pro",
   "license": "MIT",

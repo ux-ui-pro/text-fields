@@ -49,7 +49,7 @@ class $a196c1ed25598f0e$var$TextFields {
         return notchedOutline;
     }
     static setNotchWidth(notch, width) {
-        const notchElement = notch; // Используем временную переменную
+        const notchElement = notch;
         notchElement.style.width = width;
     }
     static getNotchWidth(notch) {
