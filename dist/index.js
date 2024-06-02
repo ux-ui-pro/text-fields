@@ -21,23 +21,23 @@ class $a196c1ed25598f0e$var$TextFields {
         this.resizeObserver = new ResizeObserver((entries)=>{
             entries.forEach((entry)=>{
                 const notch = entry.target.closest(".notched-outline")?.querySelector(".notched-outline__notch");
-                if (notch) this.setNotchWidth(notch, this.getNotchWidth(notch));
+                if (notch) $a196c1ed25598f0e$var$TextFields.setNotchWidth(notch, $a196c1ed25598f0e$var$TextFields.getNotchWidth(notch));
             });
         });
     }
     notched() {
         this.floatingLabel.forEach((label)=>{
-            const notchedOutline = label.closest(".notched-outline") ?? this.createNotchedOutline(label);
+            const notchedOutline = label.closest(".notched-outline") ?? $a196c1ed25598f0e$var$TextFields.createNotchedOutline(label);
             this.notches.push({
                 container: notchedOutline.parentNode,
                 notch: notchedOutline.querySelector(".notched-outline__notch")
             });
             const lastNotch = this.notches.at(-1).notch;
-            this.setNotchWidth(lastNotch, this.getNotchWidth(lastNotch));
+            $a196c1ed25598f0e$var$TextFields.setNotchWidth(lastNotch, $a196c1ed25598f0e$var$TextFields.getNotchWidth(lastNotch));
             this.resizeObserver.observe(notchedOutline.querySelector(".floating-label"));
         });
     }
-    createNotchedOutline(label) {
+    static createNotchedOutline(label) {
         const notchedOutline = document.createElement("div");
         notchedOutline.classList.add("notched-outline");
         notchedOutline.innerHTML = `
@@ -48,13 +48,14 @@ class $a196c1ed25598f0e$var$TextFields {
         label.replaceWith(notchedOutline);
         return notchedOutline;
     }
-    setNotchWidth = (notch, width)=>{
-        notch.style.width = width;
-    };
-    getNotchWidth = (notch)=>{
+    static setNotchWidth(notch, width) {
+        const notchElement = notch; // Используем временную переменную
+        notchElement.style.width = width;
+    }
+    static getNotchWidth(notch) {
         const label = notch.querySelector(".floating-label");
         return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * 0.75}px` : "auto";
-    };
+    }
     handleEvents() {
         this.textFieldContainer.forEach((field)=>{
             const notchData = this.notches.find((data)=>data.container.contains(field));
@@ -65,12 +66,12 @@ class $a196c1ed25598f0e$var$TextFields {
     }
     initialNotchWidths() {
         this.notches.forEach(({ notch: notch })=>{
-            this.setNotchWidth(notch, this.getNotchWidth(notch));
+            $a196c1ed25598f0e$var$TextFields.setNotchWidth(notch, $a196c1ed25598f0e$var$TextFields.getNotchWidth(notch));
         });
     }
-    setupObserver(field, container) {
+    /* eslint-disable class-methods-use-this */ setupObserver(field, container) {
         const fieldObserver = new MutationObserver(()=>{
-            this.updateStyles(field, container, field instanceof HTMLTextAreaElement);
+            $a196c1ed25598f0e$var$TextFields.updateStyles(field, container, field instanceof HTMLTextAreaElement);
         });
         fieldObserver.observe(field, {
             attributes: true,
@@ -84,27 +85,28 @@ class $a196c1ed25598f0e$var$TextFields {
         const eventType = fieldType ? "input" : "change";
         field.addEventListener("focus", ()=>{
             container.classList.add(fieldType ? "textarea--focused" : "input--focused");
-            this.setNotchWidth(notch, this.getNotchWidth(notch));
+            $a196c1ed25598f0e$var$TextFields.setNotchWidth(notch, $a196c1ed25598f0e$var$TextFields.getNotchWidth(notch));
         });
         field.addEventListener("blur", ()=>{
             container.classList.remove(fieldType ? "textarea--focused" : "input--focused");
-            this.setNotchWidth(notch, field.value.trim() ? this.getNotchWidth(notch) : "auto");
+            $a196c1ed25598f0e$var$TextFields.setNotchWidth(notch, field.value.trim() ? $a196c1ed25598f0e$var$TextFields.getNotchWidth(notch) : "auto");
         });
         field.addEventListener(eventType, ()=>{
-            this.updateStyles(field, container, fieldType);
-            if (fieldType) this.resizeTextarea(field, container);
+            $a196c1ed25598f0e$var$TextFields.updateStyles(field, container, fieldType);
+            if (fieldType) $a196c1ed25598f0e$var$TextFields.resizeTextarea(field, container);
         });
-        this.updateStyles(field, container, fieldType);
+        $a196c1ed25598f0e$var$TextFields.updateStyles(field, container, fieldType);
     }
-    updateStyles(field, container, fieldType) {
+    /* eslint-enable class-methods-use-this */ static updateStyles(field, container, fieldType) {
         container.classList.toggle(fieldType ? "textarea--filled" : "input--filled", field.value.trim().length > 0);
         container.classList.toggle(fieldType ? "textarea--disabled" : "input--disabled", field.disabled);
         container.classList.toggle(fieldType ? "textarea--error" : "input--error", field.required);
     }
-    resizeTextarea(field, container) {
+    static resizeTextarea(field, container) {
         if (container.classList.contains("textarea--auto-resizeable")) {
-            field.style.height = "auto";
-            field.style.height = `${field.scrollHeight}px`;
+            const newField = field;
+            newField.style.height = "auto";
+            newField.style.height = `${field.scrollHeight}px`;
         }
     }
     async init() {
