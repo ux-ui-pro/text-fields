@@ -7,29 +7,56 @@ class TextFields {
 
   private notches: { container: HTMLElement; notch: HTMLElement }[] = [];
 
+  private mutationObserver: MutationObserver;
+
   constructor() {
-    this.textFieldContainer = Array.from(document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('.text-field-container input, .text-field-container textarea'));
-    this.floatingLabel = Array.from(document.querySelectorAll<HTMLElement>('.floating-label'));
+    this.textFieldContainer = [];
+    this.floatingLabel = [];
+    this.resizeObserver = new ResizeObserver(TextFields.handleResize.bind(this));
+    this.mutationObserver = new MutationObserver(this.initializeElements.bind(this));
+    this.observeDOMChanges();
+  }
 
-    this.resizeObserver = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {
-        const notch = entry.target.closest('.notched-outline')?.querySelector<HTMLElement>('.notched-outline__notch');
+  private observeDOMChanges() {
+    this.mutationObserver.observe(document.body, { childList: true, subtree: true });
+  }
 
-        if (notch) TextFields.setNotchWidth(notch, TextFields.getNotchWidth(notch));
-      });
+  private static handleResize(entries: ResizeObserverEntry[]) {
+    entries.forEach((entry) => {
+      const notch = entry.target.closest('.notched-outline')?.querySelector<HTMLElement>('.notched-outline__notch');
+
+      if (notch) {
+        TextFields.setNotchWidth(notch, TextFields.getNotchWidth(notch));
+      }
     });
   }
 
-  private notched() {
+  private initializeElements() {
+    this.textFieldContainer = Array.from(document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('.text-field-container input, .text-field-container textarea'));
+    this.floatingLabel = Array.from(document.querySelectorAll<HTMLElement>('.floating-label'));
+
+    if (this.textFieldContainer.length > 0 && this.floatingLabel.length > 0) {
+      this.setupNotches();
+      this.handleEvents();
+      this.updateInitialNotchWidths();
+    }
+  }
+
+  private setupNotches() {
     this.floatingLabel.forEach((label) => {
       const notchedOutline = label.closest('.notched-outline') ?? TextFields.createNotchedOutline(label);
 
-      this.notches.push({ container: notchedOutline.parentNode as HTMLElement, notch: notchedOutline.querySelector<HTMLElement>('.notched-outline__notch')! });
+      if (notchedOutline) {
+        const notch = notchedOutline.querySelector<HTMLElement>('.notched-outline__notch');
 
-      const lastNotch = this.notches.at(-1)!.notch;
+        if (notch) {
+          this.notches.push({ container: notchedOutline.parentElement as HTMLElement, notch });
 
-      TextFields.setNotchWidth(lastNotch, TextFields.getNotchWidth(lastNotch));
-      this.resizeObserver.observe(notchedOutline.querySelector<HTMLElement>('.floating-label')!);
+          TextFields.setNotchWidth(notch, TextFields.getNotchWidth(notch));
+
+          this.resizeObserver.observe(label);
+        }
+      }
     });
   }
 
@@ -48,12 +75,14 @@ class TextFields {
   }
 
   private static setNotchWidth(notch: HTMLElement, width: string) {
-    const notchElement = notch;
-    notchElement.style.width = width;
+    const newNotch = notch;
+
+    newNotch.style.width = width;
   }
 
   private static getNotchWidth(notch: HTMLElement): string {
     const label = notch.querySelector<HTMLElement>('.floating-label');
+
     return label ? `${(parseFloat(getComputedStyle(label).width) + 13) * 0.75}px` : 'auto';
   }
 
@@ -61,52 +90,41 @@ class TextFields {
     this.textFieldContainer.forEach((field) => {
       const notchData = this.notches.find((data) => data.container.contains(field));
 
-      if (!notchData) return;
-
-      this.setupObserver(field, notchData.container);
-      this.addListeners(field, notchData.container, notchData.notch, field instanceof HTMLTextAreaElement);
+      if (notchData) {
+        TextFields.setupFieldEvents(field, notchData.container, notchData.notch);
+      }
     });
   }
 
-  private initialNotchWidths() {
+  private updateInitialNotchWidths() {
     this.notches.forEach(({ notch }) => {
       TextFields.setNotchWidth(notch, TextFields.getNotchWidth(notch));
     });
   }
 
-  /* eslint-disable class-methods-use-this */
-  private setupObserver(field: HTMLInputElement | HTMLTextAreaElement, container: HTMLElement) {
-    const fieldObserver = new MutationObserver(() => {
-      TextFields.updateStyles(field, container, field instanceof HTMLTextAreaElement);
-    });
-
-    fieldObserver.observe(field, { attributes: true, attributeFilter: ['required', 'disabled'] });
-  }
-
-  private addListeners(field: HTMLInputElement | HTMLTextAreaElement, container: HTMLElement, notch: HTMLElement, fieldType: boolean) {
+  private static setupFieldEvents(field: HTMLInputElement | HTMLTextAreaElement, container: HTMLElement, notch: HTMLElement) {
+    const fieldType = field instanceof HTMLTextAreaElement;
     const eventType = fieldType ? 'input' : 'change';
 
     field.addEventListener('focus', () => {
       container.classList.add(fieldType ? 'textarea--focused' : 'input--focused');
-
       TextFields.setNotchWidth(notch, TextFields.getNotchWidth(notch));
     });
 
     field.addEventListener('blur', () => {
       container.classList.remove(fieldType ? 'textarea--focused' : 'input--focused');
-
       TextFields.setNotchWidth(notch, field.value.trim() ? TextFields.getNotchWidth(notch) : 'auto');
     });
 
     field.addEventListener(eventType, () => {
       TextFields.updateStyles(field, container, fieldType);
-
-      if (fieldType) TextFields.resizeTextarea(field as HTMLTextAreaElement, container);
+      if (fieldType) {
+        TextFields.resizeTextarea(field as HTMLTextAreaElement, container);
+      }
     });
 
     TextFields.updateStyles(field, container, fieldType);
   }
-  /* eslint-enable class-methods-use-this */
 
   private static updateStyles(field: HTMLInputElement | HTMLTextAreaElement, container: HTMLElement, fieldType: boolean) {
     container.classList.toggle(fieldType ? 'textarea--filled' : 'input--filled', field.value.trim().length > 0);
@@ -117,15 +135,20 @@ class TextFields {
   private static resizeTextarea(field: HTMLTextAreaElement, container: HTMLElement) {
     if (container.classList.contains('textarea--auto-resizeable')) {
       const newField = field;
+
       newField.style.height = 'auto';
       newField.style.height = `${field.scrollHeight}px`;
     }
   }
 
   public async init() {
-    this.notched();
-    this.handleEvents();
-    this.initialNotchWidths();
+    await new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 0);
+    });
+
+    this.initializeElements();
   }
 }
 

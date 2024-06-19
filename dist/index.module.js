@@ -3,26 +3,49 @@ class $643fcf18b2d2e76f$var$TextFields {
     floatingLabel;
     resizeObserver;
     notches = [];
+    mutationObserver;
     constructor(){
-        this.textFieldContainer = Array.from(document.querySelectorAll(".text-field-container input, .text-field-container textarea"));
-        this.floatingLabel = Array.from(document.querySelectorAll(".floating-label"));
-        this.resizeObserver = new ResizeObserver((entries)=>{
-            entries.forEach((entry)=>{
-                const notch = entry.target.closest(".notched-outline")?.querySelector(".notched-outline__notch");
-                if (notch) $643fcf18b2d2e76f$var$TextFields.setNotchWidth(notch, $643fcf18b2d2e76f$var$TextFields.getNotchWidth(notch));
-            });
+        this.textFieldContainer = [];
+        this.floatingLabel = [];
+        this.resizeObserver = new ResizeObserver($643fcf18b2d2e76f$var$TextFields.handleResize.bind(this));
+        this.mutationObserver = new MutationObserver(this.initializeElements.bind(this));
+        this.observeDOMChanges();
+    }
+    observeDOMChanges() {
+        this.mutationObserver.observe(document.body, {
+            childList: true,
+            subtree: true
         });
     }
-    notched() {
+    static handleResize(entries) {
+        entries.forEach((entry)=>{
+            const notch = entry.target.closest(".notched-outline")?.querySelector(".notched-outline__notch");
+            if (notch) $643fcf18b2d2e76f$var$TextFields.setNotchWidth(notch, $643fcf18b2d2e76f$var$TextFields.getNotchWidth(notch));
+        });
+    }
+    initializeElements() {
+        this.textFieldContainer = Array.from(document.querySelectorAll(".text-field-container input, .text-field-container textarea"));
+        this.floatingLabel = Array.from(document.querySelectorAll(".floating-label"));
+        if (this.textFieldContainer.length > 0 && this.floatingLabel.length > 0) {
+            this.setupNotches();
+            this.handleEvents();
+            this.updateInitialNotchWidths();
+        }
+    }
+    setupNotches() {
         this.floatingLabel.forEach((label)=>{
             const notchedOutline = label.closest(".notched-outline") ?? $643fcf18b2d2e76f$var$TextFields.createNotchedOutline(label);
-            this.notches.push({
-                container: notchedOutline.parentNode,
-                notch: notchedOutline.querySelector(".notched-outline__notch")
-            });
-            const lastNotch = this.notches.at(-1).notch;
-            $643fcf18b2d2e76f$var$TextFields.setNotchWidth(lastNotch, $643fcf18b2d2e76f$var$TextFields.getNotchWidth(lastNotch));
-            this.resizeObserver.observe(notchedOutline.querySelector(".floating-label"));
+            if (notchedOutline) {
+                const notch = notchedOutline.querySelector(".notched-outline__notch");
+                if (notch) {
+                    this.notches.push({
+                        container: notchedOutline.parentElement,
+                        notch: notch
+                    });
+                    $643fcf18b2d2e76f$var$TextFields.setNotchWidth(notch, $643fcf18b2d2e76f$var$TextFields.getNotchWidth(notch));
+                    this.resizeObserver.observe(label);
+                }
+            }
         });
     }
     static createNotchedOutline(label) {
@@ -37,8 +60,8 @@ class $643fcf18b2d2e76f$var$TextFields {
         return notchedOutline;
     }
     static setNotchWidth(notch, width) {
-        const notchElement = notch;
-        notchElement.style.width = width;
+        const newNotch = notch;
+        newNotch.style.width = width;
     }
     static getNotchWidth(notch) {
         const label = notch.querySelector(".floating-label");
@@ -47,29 +70,16 @@ class $643fcf18b2d2e76f$var$TextFields {
     handleEvents() {
         this.textFieldContainer.forEach((field)=>{
             const notchData = this.notches.find((data)=>data.container.contains(field));
-            if (!notchData) return;
-            this.setupObserver(field, notchData.container);
-            this.addListeners(field, notchData.container, notchData.notch, field instanceof HTMLTextAreaElement);
+            if (notchData) $643fcf18b2d2e76f$var$TextFields.setupFieldEvents(field, notchData.container, notchData.notch);
         });
     }
-    initialNotchWidths() {
+    updateInitialNotchWidths() {
         this.notches.forEach(({ notch: notch })=>{
             $643fcf18b2d2e76f$var$TextFields.setNotchWidth(notch, $643fcf18b2d2e76f$var$TextFields.getNotchWidth(notch));
         });
     }
-    /* eslint-disable class-methods-use-this */ setupObserver(field, container) {
-        const fieldObserver = new MutationObserver(()=>{
-            $643fcf18b2d2e76f$var$TextFields.updateStyles(field, container, field instanceof HTMLTextAreaElement);
-        });
-        fieldObserver.observe(field, {
-            attributes: true,
-            attributeFilter: [
-                "required",
-                "disabled"
-            ]
-        });
-    }
-    addListeners(field, container, notch, fieldType) {
+    static setupFieldEvents(field, container, notch) {
+        const fieldType = field instanceof HTMLTextAreaElement;
         const eventType = fieldType ? "input" : "change";
         field.addEventListener("focus", ()=>{
             container.classList.add(fieldType ? "textarea--focused" : "input--focused");
@@ -85,7 +95,7 @@ class $643fcf18b2d2e76f$var$TextFields {
         });
         $643fcf18b2d2e76f$var$TextFields.updateStyles(field, container, fieldType);
     }
-    /* eslint-enable class-methods-use-this */ static updateStyles(field, container, fieldType) {
+    static updateStyles(field, container, fieldType) {
         container.classList.toggle(fieldType ? "textarea--filled" : "input--filled", field.value.trim().length > 0);
         container.classList.toggle(fieldType ? "textarea--disabled" : "input--disabled", field.disabled);
         container.classList.toggle(fieldType ? "textarea--error" : "input--error", field.required);
@@ -98,9 +108,12 @@ class $643fcf18b2d2e76f$var$TextFields {
         }
     }
     async init() {
-        this.notched();
-        this.handleEvents();
-        this.initialNotchWidths();
+        await new Promise((resolve)=>{
+            setTimeout(()=>{
+                resolve();
+            }, 0);
+        });
+        this.initializeElements();
     }
 }
 var $643fcf18b2d2e76f$export$2e2bcd8739ae039 = $643fcf18b2d2e76f$var$TextFields;
