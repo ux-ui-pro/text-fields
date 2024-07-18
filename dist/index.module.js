@@ -98,7 +98,6 @@ class $643fcf18b2d2e76f$var$TextFields {
     static updateStyles(field, container, fieldType) {
         container.classList.toggle(fieldType ? "textarea--filled" : "input--filled", field.value.trim().length > 0);
         container.classList.toggle(fieldType ? "textarea--disabled" : "input--disabled", field.disabled);
-        container.classList.toggle(fieldType ? "textarea--error" : "input--error", field.required);
     }
     static resizeTextarea(field, container) {
         if (container.classList.contains("textarea--auto-resizeable")) {

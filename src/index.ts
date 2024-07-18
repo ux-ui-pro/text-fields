@@ -118,6 +118,7 @@ class TextFields {
 
     field.addEventListener(eventType, () => {
       TextFields.updateStyles(field, container, fieldType);
+
       if (fieldType) {
         TextFields.resizeTextarea(field as HTMLTextAreaElement, container);
       }
@@ -129,7 +130,6 @@ class TextFields {
   private static updateStyles(field: HTMLInputElement | HTMLTextAreaElement, container: HTMLElement, fieldType: boolean) {
     container.classList.toggle(fieldType ? 'textarea--filled' : 'input--filled', field.value.trim().length > 0);
     container.classList.toggle(fieldType ? 'textarea--disabled' : 'input--disabled', field.disabled);
-    container.classList.toggle(fieldType ? 'textarea--error' : 'input--error', field.required);
   }
 
   private static resizeTextarea(field: HTMLTextAreaElement, container: HTMLElement) {

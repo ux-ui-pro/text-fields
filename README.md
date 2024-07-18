@@ -28,11 +28,11 @@ import TextFields from 'text-fields';
 ```
 <sub>CSS</sub>
 ```SCSS
-@import "text-fields/dist/";
+@import "text-fields/dist";
 ```
 <sub>if your bundler supports SCSS</sub>
 ```SCSS
-@import "text-fields/src/";
+@import "text-fields/src";
 ```
 <br>
 
