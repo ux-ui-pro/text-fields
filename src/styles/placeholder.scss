@@ -1,41 +1,13 @@
 .text-field-container {
-	& ::input-placeholder {
-		color: var(--tf-c-placeholder);
-		opacity: 0;
-		transition: opacity 225ms var(--tf-transition-easing);
-	}
+	input {
+		&::placeholder {
+			color: var(--tf-c-placeholder);
+			opacity: 0;
+			transition: opacity 225ms var(--tf-transition-easing);
+		}
 
-	& :focus::input-placeholder {
-		opacity: .65;
-	}
-
-	& :input-placeholder {
-		color: var(--tf-c-placeholder);
-		opacity: 0;
-		transition: opacity 225ms var(--tf-transition-easing);
-	}
-
-	& :focus:input-placeholder {
-		opacity: .65;
-	}
-
-	& ::placeholder {
-		color: var(--tf-c-placeholder);
-		opacity: 0;
-		transition: opacity 225ms var(--tf-transition-easing);
-	}
-
-	& :focus::placeholder {
-		opacity: .65;
-	}
-
-	& :placeholder {
-		color: var(--tf-c-placeholder);
-		opacity: 0;
-		transition: opacity 225ms var(--tf-transition-easing);
-	}
-
-	& :focus:placeholder {
-		opacity: .65;
+		&:focus::placeholder {
+			opacity: 0.65;
+		}
 	}
 }
