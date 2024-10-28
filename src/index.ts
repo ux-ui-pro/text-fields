@@ -141,6 +141,19 @@ class TextFields {
     }
   }
 
+  public updateField(field: HTMLInputElement | HTMLTextAreaElement) {
+    const container = field.closest('.text-field-container') as HTMLElement;
+    const notchData = this.notches.find((data) => data.container.contains(field));
+
+    if (container) {
+      TextFields.updateStyles(field, container, field instanceof HTMLTextAreaElement);
+
+      if (notchData) {
+        TextFields.setNotchWidth(notchData.notch, TextFields.getNotchWidth(notchData.notch));
+      }
+    }
+  }
+
   public async init() {
     await new Promise<void>((resolve) => {
       setTimeout(() => {
